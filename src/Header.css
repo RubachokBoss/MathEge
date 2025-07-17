@@ -1,0 +1,80 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item {
+    position: relative;
+    margin: 0 15px;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.menu-button:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    margin-top: 10px;
+}
+
+.submenu.open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.submenu li {
+    list-style: none;
+}
+
+.submenu li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s ease;
+}
+
+.submenu li a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
