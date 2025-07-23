@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
-import { FaBook, FaUser, FaLifeRing } from 'react-icons/fa';
+import { FaBook, FaUser, FaLifeRing, FaSun, FaMoon } from 'react-icons/fa';
 
 export default function Header() {
+  const [dark, setDark] = useState(false);
+
+  // применяем класс 'dark' к <body>
+  useEffect(() => {
+    const root = document.body;
+    if (dark) root.classList.add('dark');
+    else root.classList.remove('dark');
+  }, [dark]);
+
   const tasks = Array.from({ length: 19 }, (_, i) => `Задание ${i + 1}`);
   const profileItems = ['Данные', 'Настройки', 'Выход'];
 
@@ -11,6 +20,7 @@ export default function Header() {
       <div className="logo">
         EGE <span className="logo-plus">+</span>
       </div>
+
       <nav className="nav">
         <ul className="menu">
           <li className="menu-item">
@@ -19,9 +29,7 @@ export default function Header() {
             </button>
             <ul className="submenu">
               {tasks.map(task => (
-                <li key={task} className="submenu-item">
-                  <a href="#">{task}</a>
-                </li>
+                <li key={task} className="submenu-item"><a href="#">{task}</a></li>
               ))}
             </ul>
           </li>
@@ -32,9 +40,7 @@ export default function Header() {
             </button>
             <ul className="submenu">
               {profileItems.map(item => (
-                <li key={item} className="submenu-item">
-                  <a href="#">{item}</a>
-                </li>
+                <li key={item} className="submenu-item"><a href="#">{item}</a></li>
               ))}
             </ul>
           </li>
@@ -51,6 +57,10 @@ export default function Header() {
           </li>
         </ul>
       </nav>
+
+      <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label="Переключить тему">
+        {dark ? <FaSun /> : <FaMoon />}
+      </button>
     </header>
   );
-};
+}
