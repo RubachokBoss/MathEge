@@ -1,80 +1,105 @@
+:root {
+  --bg: #1a202c;
+  --fg: #edf2f7;
+  --accent: #38b2ac;
+  --hover: rgba(56,178,172,0.1);
+  --font: 'Inter', sans-serif;
+}
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    background: #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 70px;
+  background: var(--bg);
+  color: var(--fg);
+  position: relative;
+  z-index: 100;
+  font-family: var(--font);
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
-.nav {
-    display: flex;
-    align-items: center;
+.logo-plus {
+  color: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.nav .menu {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .menu-item {
-    position: relative;
-    margin: 0 15px;
+  position: relative;
 }
 
 .menu-button {
-    background: none;
-    border: none;
-    font-size: 1rem;
-    color: #333;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--fg);
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
 .menu-button:hover {
-    background: rgba(0, 0, 0, 0.05);
+  background: var(--hover);
+  border-radius: 6px;
 }
 
+.icon {
+  font-size: 1.2rem;
+}
+
+/* Показываем submenu по hover, без смещения страницы */
 .submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 4px;
-    overflow: hidden;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-    pointer-events: none;
-    margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: var(--bg);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  list-style: none;
+  padding: 0.5rem 0;
 }
 
-.submenu.open {
-    transform: scaleY(1);
-    opacity: 1;
-    pointer-events: auto;
+.menu-item:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-.submenu li {
-    list-style: none;
+.submenu-item a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.2s;
 }
 
-.submenu li a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-    transition: background 0.2s ease;
+.submenu-item a:hover {
+  background: var(--hover);
 }
 
-.submenu li a:hover {
-    background: rgba(0, 0, 0, 0.05);
-}
+/* убираем горизонтальную прокрутку */
+body, html { overflow-x: hidden; }
