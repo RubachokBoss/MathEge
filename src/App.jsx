@@ -7,7 +7,7 @@ function App() {
     <div>
       <Header />
       <main style={{ padding: '40px' }}>
-        <PricingSection />
+        <h1>Тестовая страница</h1>
       </main>
     </div>
   );
