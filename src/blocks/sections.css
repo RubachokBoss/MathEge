@@ -1,0 +1,176 @@
+:root{
+  --bg-dark: #0f1116;
+  --fg: #eef2f7;
+  --muted: #94a3b8;
+  --card: #1a202c;
+  --accent: #38b2ac;
+}
+
+/* общий контейнер секций */
+.section-block{
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 40px 28px;
+  background: var(--card);
+  color: var(--fg);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.35);
+  backdrop-filter: blur(3px);
+}
+.section-block--pricing{
+  background: #151b24;
+}
+
+/* ---------- ABOUT (3 колонки) ---------- */
+.about-grid-3{
+  display: grid;
+  grid-template-columns: 1fr 340px 280px; /* текст | чертёж | бенефиты */
+  gap: 2rem;
+  align-items: start;
+}
+
+.about-left .btn{
+  margin-top: .6rem;
+  background: var(--accent);
+  color: #0f1116;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.solve{
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.steps{
+  list-style: decimal;
+  padding-left: 1.2rem;
+  font-size: .92rem;
+  line-height: 1.45;
+}
+.diagram-small svg{
+  width: 100%;
+  height: auto;
+}
+.about-center{
+  display: flex;
+  justify-content: center;
+}
+.diagram-big svg{
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+.about-right .tagline{
+  text-align: center;
+}
+.about-right .tagline span{
+  color: var(--accent);
+}
+.benefits{
+  list-style: none;
+  padding: 0;
+  margin-top: .6rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.benefits li{
+  background: rgba(255,255,255,.05);
+  padding: .6rem .9rem;
+  border-radius: 6px;
+}
+
+/* ---------- PRICING (3D стек) ---------- */
+.pricing-header{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.pricing-header h2{
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  margin-bottom: .4rem;
+}
+.pricing-header p{
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.stack-wrapper{
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.stack{
+  position: relative;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+.card{
+  position: absolute;
+  width: min(90%, 420px);
+  background: #1d2532;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.35);
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  transform-origin: 50% 80%;
+}
+.card-head h3{ margin: 0; font-size: 1.4rem; }
+.subtitle{ display: inline-block; margin-top: .2rem; color: var(--muted); font-size: .9rem; }
+.price{ margin-top: .6rem; font-size: 1.2rem; font-weight: 600; }
+.card-body{ margin-top: .8rem; }
+.features{
+  list-style: none; margin: 0 0 1rem 0; padding: 0; color: #cbd5e1;
+}
+.features li{ margin: .35rem 0; line-height: 1.3; }
+.buy-btn{
+  width: 100%; border: none; color: #0f1116; font-weight: 600;
+  padding: .8rem 1rem; border-radius: 10px; cursor: pointer; transition: transform .12s;
+}
+.buy-btn:active{ transform: scale(.98); }
+
+.nav-btn{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.06); border: none; color: var(--fg);
+  width: 44px; height: 44px; border-radius: 50%; font-size: 1.4rem; cursor: pointer;
+  transition: background .2s; z-index: 99;
+}
+.nav-btn:hover{ background: rgba(255,255,255,.12); }
+.prev{ left: -10px; }
+.next{ right: -10px; }
+.dots{
+  margin-top: 1.5rem; display: flex; justify-content: center; gap: .4rem;
+}
+.dot{
+  width: 8px; height: 8px; background: rgba(255,255,255,.2);
+  border: none; border-radius: 50%; cursor: pointer;
+}
+.dot.active{ background: var(--accent); }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 992px){
+  .about-grid-3{
+    grid-template-columns: 1fr 320px; /* текст + чертёж */
+  }
+  .about-right{
+    grid-column: 1 / 3;
+  }
+}
+@media (max-width: 680px){
+  .stack{ height: 500px; }
+  .card{ width: 92%; }
+  .prev{ left: 4px; } .next{ right: 4px; }
+}
+@media (max-width: 640px){
+  .about-grid-3{
+    grid-template-columns: 1fr; /* всё в столбик */
+  }
+  .about-right{ align-items: flex-start; }
+  .diagram-big{ margin: 1.5rem 0; }
+}

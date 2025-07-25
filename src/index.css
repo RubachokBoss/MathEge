@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Fira+Code&display=swap');
+
+body {
+  font-family: 'Fira Code', 'Roboto Mono', 'Segoe UI', sans-serif;
+}

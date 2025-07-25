@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './pricelist.css';
+import './sections.css';
 
 const PLANS = [
   {
@@ -11,10 +11,10 @@ const PLANS = [
     accent: '#f6ad55',
     features: [
       'Короткие ролики 2–5 мин',
-      'База + разборы самых частых ошибок',
+      'База + разборы частых ошибок',
       'Домашки с автопроверкой',
-      'Чат-бот-помощник'
-    ]
+      'Чат-бот-помощник',
+    ],
   },
   {
     id: 1,
@@ -24,10 +24,10 @@ const PLANS = [
     accent: '#38b2ac',
     features: [
       'Все из «Чайника»',
-      'Углублённые файлы-«шпаргалки»',
-      'Челленджи на скорость / логику',
-      'Разбор реальных вариантов 2023–2024'
-    ]
+      'Углублённые «шпаргалки»',
+      'Челленджи на скорость и логику',
+      'Разбор реальных вариантов',
+    ],
   },
   {
     id: 2,
@@ -37,48 +37,50 @@ const PLANS = [
     accent: '#805ad5',
     features: [
       'Все из «Хорошиста»',
-      'Личные мит-ревью со срезом слабых мест',
-      'Тренажёры 18–19 заданий',
-      'Персональный план до ЕГЭ'
-    ]
-  }
+      'Личные ревью со срезом слабых мест',
+      'Тренажёры 18–19',
+      'Персональный план до ЕГЭ',
+    ],
+  },
 ];
 
 export default function PricingSection() {
   const [active, setActive] = useState(1);
 
-  const goPrev = () => setActive(a => (a - 1 + PLANS.length) % PLANS.length);
-  const goNext = () => setActive(a => (a + 1) % PLANS.length);
+  const goPrev = () => setActive((a) => (a - 1 + PLANS.length) % PLANS.length);
+  const goNext = () => setActive((a) => (a + 1) % PLANS.length);
 
   const calcCardState = (i) => {
-    const offset = i - active;
-    // замыкаем по кругу (чтобы 0 был «справа» от 2 и т.д.)
-    const length = PLANS.length;
-    let shortest = offset;
-    if (offset > length / 2) shortest = offset - length;
-    if (offset < -length / 2) shortest = offset + length;
+    const len = PLANS.length;
+    const raw = i - active;
+    let shortest = raw;
+    if (raw > len / 2) shortest = raw - len;
+    if (raw < -len / 2) shortest = raw + len;
 
     const depth = Math.abs(shortest);
     const scale = 1 - depth * 0.06;
     const x = shortest * 60;
     const rotate = shortest * -5;
-    const zIndex = length - depth;
+    const zIndex = len - depth;
     const opacity = depth > 2 ? 0 : 1;
 
     return { x, scale, rotate, zIndex, opacity, isActive: shortest === 0 };
   };
 
-  const stack = useMemo(() => PLANS.map((p, i) => ({ ...p, ...calcCardState(i) })), [active]);
+  const stack = useMemo(
+    () => PLANS.map((p, i) => ({ ...p, ...calcCardState(i) })),
+    [active]
+  );
 
   return (
-    <section className="pricing-section" id="pricing">
+    <section className="section-block section-block--pricing" id="pricing">
       <div className="pricing-header">
         <h2>Выбери свой буст к баллам</h2>
-        <p>Цветовая палитра и стиль — в духе твоего сайта</p>
+        <p>3D‑стек тарифов с живой анимацией</p>
       </div>
 
       <div className="stack-wrapper">
-        <button className="nav-btn prev" onClick={goPrev} aria-label="предыдущий тариф">‹</button>
+        <button className="nav-btn prev" onClick={goPrev} aria-label="prev">‹</button>
 
         <div className="stack">
           {stack.map((plan) => (
@@ -90,7 +92,7 @@ export default function PricingSection() {
                 x: plan.x,
                 scale: plan.scale,
                 rotateZ: plan.rotate,
-                opacity: plan.opacity
+                opacity: plan.opacity,
               }}
               transition={{ type: 'spring', stiffness: 260, damping: 20 }}
               onClick={() => setActive(plan.id)}
@@ -125,7 +127,7 @@ export default function PricingSection() {
           ))}
         </div>
 
-        <button className="nav-btn next" onClick={goNext} aria-label="следующий тариф">›</button>
+        <button className="nav-btn next" onClick={goNext} aria-label="next">›</button>
       </div>
 
       <div className="dots">
@@ -134,7 +136,7 @@ export default function PricingSection() {
             key={i}
             className={`dot ${i === active ? 'active' : ''}`}
             onClick={() => setActive(i)}
-            aria-label={`переключиться на тариф ${i + 1}`}
+            aria-label={`go to plan ${i + 1}`}
           />
         ))}
       </div>

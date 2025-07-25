@@ -1,0 +1,21 @@
+.bg3d {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none; /* чтобы фон не мешал кликам по сайту */
+  background: #0f1116; /* fallback цвет, если WebGL не прогрузится */
+}
+
+/* сверху лёгкая вуаль, чтобы контент читался */
+.bg3d-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      circle at 50% 50%,
+      rgba(56, 178, 172, 0.08) 0%,
+      rgba(128, 90, 213, 0.05) 40%,
+      rgba(15, 17, 22, 0.6) 100%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
